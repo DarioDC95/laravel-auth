@@ -16,7 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -26,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -37,7 +39,21 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $form_data = $request->validated();
+
+        $slug = Project::generateSlug($request->title);
+
+        // AGGIUNGO UNA COPPIA CHIAVE/VALORE ALL'ARRAY $form_data
+        $form_data['slug'] = $slug;
+
+        /* 
+        $newProject = new Project();
+        $newProject->fill($form_data); */
+        // QUESTE DUE OPERAZIONI LE POSSO SVOLGERE IN UN UNICO METODO:
+        $newProject = Project::create($form_data);
+
+        return redirect()->route('admin.projects.index')->with('message', 'Project aggiunto correttamente');
+
     }
 
     /**
