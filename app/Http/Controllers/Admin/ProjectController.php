@@ -52,7 +52,7 @@ class ProjectController extends Controller
         // QUESTE DUE OPERAZIONI LE POSSO SVOLGERE IN UN UNICO METODO:
         $newProject = Project::create($form_data);
 
-        return redirect()->route('admin.projects.index')->with('message', 'Project aggiunto correttamente');
+        return redirect()->route('admin.projects.index')->with('message', 'Il Progetto aggiunto correttamente');
 
     }
 
@@ -95,7 +95,7 @@ class ProjectController extends Controller
 
         $project->update($form_data);
 
-        return redirect()->route('admin.projects.index')->with('message', 'Project modificato correttamente');
+        return redirect()->route('admin.projects.index')->with('message', 'Il Progetto modificato correttamente');
     }
 
     /**
@@ -106,6 +106,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index')->with('message', 'Il Progetto è stato eliminato correttamente');
     }
 }
