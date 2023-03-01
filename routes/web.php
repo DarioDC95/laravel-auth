@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
+// use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// PROVA DI LANCIO DI UN COMANDO DI SEEDER DALLA VIEW
+// Route::get('/fill', function(){
+//     Artisan::call('migrate:refresh',['--seed' => ' ']);
+// });
+
+// Route::get('/fill', function(){
+//     Artisan::call('db:seed', ['--class' => 'ProjectSeeder']);
+// })->name('seeder');
 
 // MODIFICHIAMO LA ROTTA DELLA VIEW "DASHBOARD" PERCHE' ABBIAMO UN CONTROLLER CHE C'E' LA RESTITUISCE
 // Route::get('/dashboard', function () {

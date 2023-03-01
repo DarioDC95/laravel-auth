@@ -57,9 +57,14 @@
                                         </td>
                                     </tr>
                                     @empty 
+                                    <div class="mb-4">
                                         <div class="d-inline-block alert alert-success">
                                             Non hai nessun progetto, clicca su aggiungi progetto per iniziare
                                         </div>
+                                        {{-- <div>
+                                            <a href="" class="btn btn-primary">Riempi la tabella progetti</a>
+                                        </div> --}}
+                                    </div>
                                 @endforelse
                             </tbody>
                         </table>
