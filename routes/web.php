@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
-// use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// PROVA DI LANCIO DI UN COMANDO DI SEEDER DALLA VIEW
-// Route::get('/fill', function(){
-//     Artisan::call('migrate:refresh',['--seed' => ' ']);
-// });
-
-// Route::get('/fill', function(){
-//     Artisan::call('db:seed', ['--class' => 'ProjectSeeder']);
-// })->name('seeder');
-
 // MODIFICHIAMO LA ROTTA DELLA VIEW "DASHBOARD" PERCHE' ABBIAMO UN CONTROLLER CHE C'E' LA RESTITUISCE
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -42,6 +33,16 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
+    Route::get('/fill', function(){
+        Artisan::call('db:seed', ['--class' => 'ProjectSeeder']);
+        return redirect()->route('admin.projects.index')->with('message', 'I Progetti sono stati creati correttamente');
+    })->name('seeder');
+    
+    // PROVA DI LANCIO DI UN COMANDO DI SEEDER DALLA VIEW
+    Route::get('/reset', function(){
+        Artisan::call('db:seed', ['--class' => 'ProjectSeeder']);
+        return redirect()->route('admin.projects.index')->with('message', 'I Progetti sono stati creati correttamente');
+    })->name('seeder');
 });
 
 Route::middleware('auth')->group(function () {
