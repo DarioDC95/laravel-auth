@@ -35,7 +35,7 @@
                                 <th>Azioni</th>
                             </thead>
                             <tbody>
-                                @foreach ( $projects as $project )
+                                @forelse ( $projects as $project )
                                     <tr>
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->title }}</td>
@@ -56,7 +56,11 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty 
+                                        <div class="d-inline-block alert alert-success">
+                                            Non hai nessun progetto, clicca su aggiungi progetto per iniziare
+                                        </div>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
