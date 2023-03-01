@@ -4,8 +4,8 @@
     <main>
         <section>
             <div class="container">
-                <div class="row">
-                    <div class="col-12 my-5">
+                <div class="row my-5">
+                    <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h2>Elenco Projects</h2>
@@ -15,14 +15,17 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-                    @if (session('message'))
-                    <div class="col-4">
-                        <div class="alert alert-success">
-                            {{ session('message') }}
+                </div>
+                @if (session('message'))
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
                         </div>
                     </div>
-                    @endif
+                @endif
+                <div class="row">
                     <div class="col-12">
                         <table class="table table-striped">
                             <thead>
@@ -37,9 +40,12 @@
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->title }}</td>
                                         <td>{{ $project->slug }}</td>
-                                        <td>
+                                        <td class="d-flex">
                                             <div>
-                                                <a href="{{ route('admin.projects.show', ['project' => $project->slug]) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                                <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            </div>
+                                            <div class="mx-1">
+                                                <a href="{{ route('admin.projects.edit', $project->slug) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                                             </div>
                                         </td>
                                     </tr>

@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row my-5">
                     <div class="col-12">
-                        <h2>Inserisci un nuovo progetto</h2>
+                        <h2>Modifica il progetto selezionato</h2>
                     </div>
                     @if ($errors->any())
                         @foreach ($errors->all() as $value)
@@ -16,8 +16,9 @@
                 </div>
                 <div class="row">    
                     <div class="col-12">
-                        <form action="{{ route('admin.projects.store') }}" method="POST">
+                        <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
                         @csrf
+                        @method('PUT')
                             <div class="form-group mb-4">
                                 <label class="control-label">Titolo</label>
                                 <input type="text" class="form-control" placeholder="Inserisci un nuovo titolo" id="title" name="title">
@@ -32,7 +33,7 @@
                                 <textarea type="text" class="form-control" placeholder="Inserisci una nuova Descrizione" id="content" name="content"></textarea>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary">Salva Progetto</button>
+                                <button type="submit" class="btn btn-primary">Salva Modifica</button>
                             </div>
                         </form>
                     </div>
